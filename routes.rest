@@ -1,0 +1,221 @@
+// LOCALHOST FOR AUTH
+###
+GET http://localhost:5500/api/user/all-users
+###
+GET http://localhost:5500/api/user/652471177c9e3c07d4a5362f
+###
+GET http://localhost:5500/api/user/652471177c9e3c07d4a5362f
+###
+GET http://localhost:5500/api/user/652471177c9e3c07d4a5362f
+###
+GET http://localhost:5500/api/user/refresh
+###
+GET http://localhost:5500/api/user/logout
+###
+POST http://localhost:5500/api/user/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstname": "charle",
+    "lastname": "Tape",
+    "dateOfBirth": "1991-15-25",
+    "department": "trader",
+    "salary": 1500,
+    "email": "taper91@gmail.com",
+    "hireDate": "2021-10-27",
+    "jobTitle": "saler",
+    "mobile": "+2250825647802",
+    "password": "taper27"
+}
+###
+POST http://localhost:5500/api/user/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "taper91@gmail.com",
+    "password": "taper27"
+}
+###
+POST http://localhost:5500/api/user/admin-login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "kokomouhamed96@yahoo.com",
+    "password": "patrick96"
+}
+###
+PUT http://localhost:5500/api/user/edit-user HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstname": "charley",
+    "lastname": "Tapesh",
+    "dateOfBirth": "1992-10-20",
+    "department": "trader",
+    "salary": 1500,
+    "email": "taper91@gmail.com",
+    "hireDate": "2021-10-27",
+    "jobTitle": "saler",
+    "mobile": "+2250825647802",
+    "password": "taper27"
+}
+###
+DELETE http://localhost:5500/api/user/652481c0da6618d437cb093f HTTP/1.1
+
+
+
+
+// PRODUCTION Deploy FOR AUTH
+### 
+GET http://localhost:5500/api/user/all-users
+###
+GET http://localhost:5500/api/user/652471177c9e3c07d4a5362f
+###
+GET http://localhost:5500/api/user/652471177c9e3c07d4a5362f
+###
+GET http://localhost:5500/api/user/652471177c9e3c07d4a5362f
+###
+GET http://localhost:5500/api/user/refresh
+###
+GET http://localhost:5500/api/user/logout
+###
+POST http://localhost:5500/api/user/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstname": "charle",
+    "lastname": "Tape",
+    "dateOfBirth": "1991-15-25",
+    "department": "trader",
+    "salary": 1500,
+    "email": "taper91@gmail.com",
+    "hireDate": "2021-10-27",
+    "jobTitle": "saler",
+    "mobile": "+2250825647802",
+    "password": "taper27"
+}
+###
+POST http://localhost:5500/api/user/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "taper91@gmail.com",
+    "password": "taper27"
+}
+###
+POST http://localhost:5500/api/user/admin-login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "kokomouhamed96@yahoo.com",
+    "password": "patrick96"
+}
+###
+PUT http://localhost:5500/api/user/edit-user HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstname": "charley",
+    "lastname": "Tapesh",
+    "dateOfBirth": "1992-10-20",
+    "department": "trader",
+    "salary": 1500,
+    "email": "taper91@gmail.com",
+    "hireDate": "2021-10-27",
+    "jobTitle": "saler",
+    "mobile": "+2250825647802",
+    "password": "taper27"
+}
+###
+DELETE http://localhost:5500/api/user/652481c0da6618d437cb093f HTTP/1.1
+
+
+
+
+
+
+
+
+
+// LOCALHOST FOR PRODUCTION
+###
+GET http://localhost:5500/api/product/
+###
+GET http://localhost:5500/api/product/652510e5d8cf66029dbfbb3c
+###
+GET http://localhost:5500/api/product/652510e5d8cf66029dbfbb3c
+###
+GET http://localhost:5500/api/product/652510e5d8cf66029dbfbb3c
+###
+POST http://localhost:5500/api/product/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "productName": "Coco",
+  "description": "A coco product are very healthy.",
+  "category": "milk",
+  "price": 20,
+  "quantityInStock": 20,
+  "manufacturer": "nice one",
+  "supplier": "Mr Koko",
+  "dateAdded": "2023-10-10"
+}
+###
+PUT http://localhost:5500/api/product/652510e5d8cf66029dbfbb3c HTTP/1.1
+Content-Type: application/json
+
+{
+  "productName": "Coco",
+  "description": "A coco product is very healthy.",
+  "category": "milk",
+  "price": 20,
+  "quantityInStock": 25,
+  "manufacturer": "nice one",
+  "supplier": "Mr Koko",
+  "dateAdded": "2023-10-10"
+}
+###
+DELETE http://localhost:5500/api/product/652510e5d8cf66029dbfbb3c HTTP/1.1
+
+
+
+
+// PRODUCTION Deploy FOR PRODUCTION
+###
+GET http://localhost:5500/api/product/
+###
+GET http://localhost:5500/api/product/652510e5d8cf66029dbfbb3c
+###
+GET http://localhost:5500/api/product/652510e5d8cf66029dbfbb3c
+###
+GET http://localhost:5500/api/product/652510e5d8cf66029dbfbb3c
+###
+POST http://localhost:5500/api/product/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "productName": "Coco",
+  "description": "A coco product are very healthy.",
+  "category": "milk",
+  "price": 20,
+  "quantityInStock": 20,
+  "manufacturer": "nice one",
+  "supplier": "Mr Koko",
+  "dateAdded": "2023-10-10"
+}
+###
+PUT http://localhost:5500/api/product/652510e5d8cf66029dbfbb3c HTTP/1.1
+Content-Type: application/json
+
+{
+  "productName": "Coco",
+  "description": "A coco product is very healthy.",
+  "category": "milk",
+  "price": 20,
+  "quantityInStock": 25,
+  "manufacturer": "nice one",
+  "supplier": "Mr Koko",
+  "dateAdded": "2023-10-10"
+}
+###
+DELETE http://localhost:5500/api/product/652510e5d8cf66029dbfbb3c HTTP/1.1
