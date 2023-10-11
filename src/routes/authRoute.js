@@ -2,7 +2,7 @@ const express = require('express');
 const {
     createUser, 
     loginUserCtrl, 
-    getallUser, 
+    // getallUser, 
     // getaUser, 
     deleteaUser, 
     UpdateaUser,  
@@ -20,7 +20,7 @@ const router = express.Router();
 router.post('/register', createUser);
 router.post('/login', loginUserCtrl);
 router.post("/admin-login", loginAdmin);
-router.get('/all-users', getallUser);
+// router.get('/all-users', getallUser);
 // router.get('/refresh', handleRefreshToken);
 // router.get('/logout', logout);
 // router.get('/:id', authMiddleware , isAdmin, getaUser);
