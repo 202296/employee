@@ -8,8 +8,6 @@ GET http://localhost:5500/api/user/652471177c9e3c07d4a5362f
 ###
 GET http://localhost:5500/api/user/652471177c9e3c07d4a5362f
 ###
-GET http://localhost:5500/api/user/refresh
-###
 GET http://localhost:5500/api/user/logout
 ###
 POST http://localhost:5500/api/user/register HTTP/1.1
@@ -74,8 +72,6 @@ GET http://localhost:5500/api/user/652471177c9e3c07d4a5362f
 GET http://localhost:5500/api/user/652471177c9e3c07d4a5362f
 ###
 GET http://localhost:5500/api/user/652471177c9e3c07d4a5362f
-###
-GET http://localhost:5500/api/user/refresh
 ###
 GET http://localhost:5500/api/user/logout
 ###

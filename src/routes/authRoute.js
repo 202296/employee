@@ -21,7 +21,7 @@ router.post('/register', createUser);
 router.post('/login', loginUserCtrl);
 router.post("/admin-login", loginAdmin);
 router.get('/all-users', getallUser);
-router.get('/refresh', handleRefreshToken);
+// router.get('/refresh', handleRefreshToken);
 router.get('/logout', logout);
 // router.get('/:id', authMiddleware , isAdmin, getaUser);
 router.get('/:id', authMiddleware, getaUser);
