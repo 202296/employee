@@ -7,7 +7,7 @@ const {
     deleteaUser, 
     UpdateaUser,  
     // handleRefreshToken, 
-    logout, 
+    // logout, 
     loginAdmin,
     saveAddress,
 } = require('../controllers/userController');
@@ -24,7 +24,7 @@ router.get('/all-users', getallUser);
 // router.get('/refresh', handleRefreshToken);
 // router.get('/logout', logout);
 // router.get('/:id', authMiddleware , isAdmin, getaUser);
-router.get('/:id', authMiddleware, getaUser);
+// router.get('/:id', authMiddleware, getaUser);
 router.delete('/:id', deleteaUser);
 router.put('/edit-user', authMiddleware, UpdateaUser);
 router.put("/save-address", authMiddleware, saveAddress);
