@@ -3,7 +3,7 @@ const {
     createUser, 
     loginUserCtrl, 
     getallUser, 
-    getaUser, 
+    // getaUser, 
     deleteaUser, 
     UpdateaUser,  
     // handleRefreshToken, 
