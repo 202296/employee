@@ -1,21 +1,24 @@
 const express = require("express");
 const {
-  // createProduct,
-  // getaProduct,
+  createProduct,
+  getaProduct,
   getAllProduct,
-  // updateProduct,
-  // deleteProduct,
+  updateProduct,
+  deleteProduct,
 } = require("../controllers/productController");
-// const { isAdmin, authMiddleware } = require("../middlewares/authMiddleware");
+const { isAdmin, authMiddleware } = require("../middlewares/authMiddleware");
+const asyncHandler = require("express-async-handler");
 const router = express.Router();
 
-// router.post("/", authMiddleware, isAdmin, createProduct);
+router.post("/", authMiddleware, isAdmin, asyncHandler(createProduct));
 
-// router.get("/:id", getaProduct);
+router.get("/:id", asyncHandler(getaProduct));
 
-// router.put("/:id", authMiddleware, isAdmin, updateProduct);
-// router.delete("/:id", authMiddleware, isAdmin, deleteProduct);
+router.put("/:id", authMiddleware, isAdmin, asyncHandler(updateProduct));
+router.delete("/:id", authMiddleware, isAdmin, asyncHandler(deleteProduct));
 
-router.get("/", getAllProduct);
+router.get("/", asyncHandler(getAllProduct));
 
-module.exports = router;
+
+
+module.exports =  router

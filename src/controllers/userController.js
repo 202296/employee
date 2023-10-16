@@ -1,14 +1,11 @@
 const { generateToken } = require('../configs/jwToken');
 const User = require('../models/userModel');
-// const Product = require("../models/productModel");
-const asyncHandler = require('express-async-handler');
 const validateMongodbId = require('../utils/validateMongodbId');
 const { generateRefreshToken } = require('../configs/refreshToken');
 const jwt = require('jsonwebtoken');
-// const crypto = require('crypto')
 
 
-const createUser = asyncHandler(async(req, res) => {
+const createUser = async(req, res) => {
     const email = req.body.email;
     const findUser = await User.findOne({email: email});
     if (!findUser) {
@@ -19,9 +16,9 @@ const createUser = asyncHandler(async(req, res) => {
         // User already exists
         throw new Error('User Already Exists');
     }
-});
+};
 
-const loginUserCtrl = asyncHandler(async(req, res) =>{
+const loginUserCtrl = async(req, res) =>{
     const {email, password} = req.body;
     // check if user exist or not
     const findUser = await User.findOne({email})
@@ -56,11 +53,11 @@ const loginUserCtrl = asyncHandler(async(req, res) =>{
     } else {
         throw new Error('Invalid Credentials');
     }
-});
+};
 
 
 
-const loginAdmin = asyncHandler(async(req, res) =>{
+const loginAdmin = async(req, res) =>{
     const {email, password} = req.body;
     // check if user exist or not
     const findAdmin = await User.findOne({email})
@@ -96,9 +93,9 @@ const loginAdmin = asyncHandler(async(req, res) =>{
     } else {
         throw new Error('Invalid Credentials');
     }
-});
+};
 // handle refresh token
-const handleRefreshToken = asyncHandler(async (req, res) => {
+const handleRefreshToken = async (req, res) => {
     const cookie = req.cookies;
     if(!cookie?.refreshToken) throw new Error('No Refresh Token in Cookies');
     const refreshToken = cookie.refreshToken;
@@ -111,11 +108,11 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
         const accessToken = generateToken(user?._id)
         res.json({accessToken});
     })   
-});
+};
 
 // Logout Functionality
 
-const logout = asyncHandler(async (req, res) => {
+const logout = async (req, res) => {
     const cookie = req.cookies;
     if (!cookie?.refreshToken) {
       throw new Error('No Refresh Token in Cookies');
@@ -144,12 +141,12 @@ const logout = asyncHandler(async (req, res) => {
       secure: true,
     });
     res.sendStatus(204); // No Content
-  });
+  };
   
 
 // Update a user
 
-const UpdateaUser = asyncHandler(async (req, res) => {
+const UpdateaUser = async (req, res) => {
     const {_id} = req.user;
     validateMongodbId(_id)
     try {
@@ -172,11 +169,11 @@ const UpdateaUser = asyncHandler(async (req, res) => {
     } catch (error) {
         throw new Error(error);
     }
-})
+};
 
 // Save User Address
 
-const saveAddress = asyncHandler(async (req, res, next) => {
+const saveAddress = async (req, res, next) => {
     const {_id} = req.user;
     validateMongodbId(_id)
     try {
@@ -191,11 +188,11 @@ const saveAddress = asyncHandler(async (req, res, next) => {
     } catch (error) {
         throw new Error(error);
     }
-})
+}
 
 // Get all user
 
-const getallUser = asyncHandler(async(req, res) =>{
+const getallUser = async(req, res) =>{
  try {
     const getUsers = await User.find();
     res.json(getUsers);
@@ -203,11 +200,11 @@ const getallUser = asyncHandler(async(req, res) =>{
   catch (error) {
         throw new Error(error)
     }
-});
+};
 
 // Get a single user
 
-const getaUser = asyncHandler(async(req, res) => {
+const getaUser = async(req, res) => {
         const {id} = req.params;
         validateMongodbId(id)
         try {
@@ -218,11 +215,11 @@ const getaUser = asyncHandler(async(req, res) => {
         } catch (error) {
             throw new Error(error);
         }
-});
+};
 
 // Delete a single user
 
-const deleteaUser = asyncHandler(async(req, res) => {
+const deleteaUser = async(req, res) => {
     const {id} = req.params;
     validateMongodbId(id)
     try {
@@ -233,7 +230,7 @@ const deleteaUser = asyncHandler(async(req, res) => {
     } catch (error) {
         throw new Error(error);
     }
-});
+};
 
 
 module.exports = {

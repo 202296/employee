@@ -1,9 +1,8 @@
 const Product = require("../models/productModel");
-const asyncHandler = require("express-async-handler");
 const slugify = require("slugify");
 const validateMongodbId = require("../utils/validateMongodbId");
 
-const createProduct = asyncHandler(async (req, res) => {
+const createProduct = async (req, res) => {
   try {
     if (req.body.title) {
       req.body.slug = slugify(req.body.title);
@@ -13,9 +12,9 @@ const createProduct = asyncHandler(async (req, res) => {
   } catch (error) {
     throw new Error(error);
   }
-});
+};
 
-const updateProduct = asyncHandler(async (req, res) => {
+const updateProduct = async (req, res) => {
     const id = req.params.id; // Corrected
   
     try {
@@ -38,10 +37,10 @@ const updateProduct = asyncHandler(async (req, res) => {
     } catch (error) {
       throw new Error(error);
     }
-  });
+  };
   
 
-const deleteProduct = asyncHandler(async (req, res) => {
+const deleteProduct = async (req, res) => {
   const id = req.params.id;
   validateMongodbId(id);
   try {
@@ -50,9 +49,9 @@ const deleteProduct = asyncHandler(async (req, res) => {
   } catch (error) {
     throw new Error(error);
   }
-});
+};
 
-const getaProduct = asyncHandler(async (req, res) => {
+const getaProduct = async (req, res) => {
   const { id } = req.params;
   validateMongodbId(id);
   try {
@@ -61,9 +60,9 @@ const getaProduct = asyncHandler(async (req, res) => {
   } catch (error) {
     throw new Error(error);
   }
-});
+};
 
-const getAllProduct = asyncHandler(async (req, res) => {
+const getAllProduct = async (req, res) => {
   try {
     // Filtering
     const queryObj = { ...req.query };
@@ -107,7 +106,7 @@ const getAllProduct = asyncHandler(async (req, res) => {
   } catch (error) {
     throw new Error(error);
   }
-});
+};
 
 
 

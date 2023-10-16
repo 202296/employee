@@ -51,9 +51,6 @@ var userSchema = new mongoose.Schema(
         type: String,
         default: "employee",
       },
-      address: {
-        type: String,
-      },
       refreshToken: {
         type: String,
       },

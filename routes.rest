@@ -1,0 +1,82 @@
+// LOCALHOST
+###
+GET http://localhost:5500/api/user/all-users
+###
+GET http://localhost:5500/api/user/652da17c4f77538c185505ad
+###
+POST http://localhost:5000/api/user/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstname": "charle",
+    "lastname": "Taper",
+    "dateOfBirth": "1991-15-25",
+    "department": "trader",
+    "salary": 1500,
+    "email": "taper91@gmail.com",
+    "hireDate": "2021-10-27",
+    "jobTitle": "sale",
+    "mobile": "+225086478021",
+    "password": "tape92"
+}
+###
+PUT http://localhost:5000/api/user/652b35dd1b4d9fc3584126cf HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstname": "charle",
+    "lastname": "Taper",
+    "dateOfBirth": "1992-15-25",
+    "department": "trader",
+    "salary": 1500,
+    "email": "taper92@gmail.com",
+    "hireDate": "2021-10-27",
+    "jobTitle": "sale",
+    "mobile": "+225086478022",
+    "password": "tape92"
+}
+###
+DELETE http://localhost:5000/api/user/652b35dd1b4d9fc3584126cf HTTP/1.1
+
+
+
+
+// PRODUCTION Deploy
+### 
+GET https://cse-user-project.onrender.com/api/user/all-users 
+### 
+GET https://cse-user-project.onrender.com/api/user/652b36a2d2bbf133fa14b8e2 
+### 
+POST https://cse-user-project.onrender.com/api/user/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstname": "Arthur Kouadio",
+    "lastname": "Koko",
+    "dateOfBirth": "2002-5-08",
+    "department": "Finance",
+    "salary": 2500,
+    "email": "sidney2@gmail.com",
+    "hireDate": "2022-10-25",
+    "jobTitle": "Accounter",
+    "mobile": "+2250524598763",
+    "password": "arthur02"
+}
+###
+PUT https://cse-user-project.onrender.com/api/user/652b36a2d2bbf133fa14b8e2 HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstname": "Arthur Kouadio",
+    "lastname": "Koko",
+    "dateOfBirth": "2002-5-07",
+    "department": "Finance",
+    "salary": 2500,
+    "email": "sidney2@gmail.com",
+    "hireDate": "2022-07-25",
+    "jobTitle": "Accounter",
+    "mobile": "+2250524598764",
+    "password": "arthur02"
+} 
+###
+DELETE https://cse-user-project.onrender.com/api/user/652b36a2d2bbf133fa14b8e2 HTTP/1.1
