@@ -1,11 +1,15 @@
-const { generateToken } = require('../configs/jwToken');
+const { generateToken } = require('../configs/jwtoken');
 const User = require('../models/userModel');
+const Product = require("../models/productModel");
+const asyncHandler = require('express-async-handler');
 const validateMongodbId = require('../utils/validateMongodbId');
 const { generateRefreshToken } = require('../configs/refreshToken');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto')
+const sendEmail = require('./emailController');
 
 
-const createUser = async(req, res) => {
+const createUser = asyncHandler(async(req, res) => {
     const email = req.body.email;
     const findUser = await User.findOne({email: email});
     if (!findUser) {
@@ -16,9 +20,9 @@ const createUser = async(req, res) => {
         // User already exists
         throw new Error('User Already Exists');
     }
-};
+});
 
-const loginUserCtrl = async(req, res) =>{
+const loginUserCtrl = asyncHandler(async(req, res) =>{
     const {email, password} = req.body;
     // check if user exist or not
     const findUser = await User.findOne({email})
@@ -41,23 +45,18 @@ const loginUserCtrl = async(req, res) =>{
             _id: findUser?._id,
             firstname: findUser?.firstname,
             lastname: findUser?.lastname,
-            dateOfBirth: findUser?.dateOfBirth,
-            department: findUser?.department,
-            salary: findUser?.salary,
             email: findUser?.email,
-            hireDate: findUser?.hireDate,
-            jobTitle: findUser?.jobTitle,
             mobile: findUser?.mobile,
             token: generateToken(findUser?._id),
         });
     } else {
         throw new Error('Invalid Credentials');
     }
-};
+});
 
 
 
-const loginAdmin = async(req, res) =>{
+const loginAdmin = asyncHandler(async(req, res) =>{
     const {email, password} = req.body;
     // check if user exist or not
     const findAdmin = await User.findOne({email})
@@ -81,21 +80,16 @@ const loginAdmin = async(req, res) =>{
             _id: findAdmin?._id,
             firstname: findAdmin?.firstname,
             lastname: findAdmin?.lastname,
-            dateOfBirth: findAdmin?.dateOfBirth,
-            department: findAdmin?.department,
-            salary: findAdmin?.salary,
             email: findAdmin?.email,
-            hireDate: findAdmin?.hireDate,
-            jobTitle: findAdmin?.jobTitle,
             mobile: findAdmin?.mobile,
             token: generateToken(findAdmin?._id),
         });
     } else {
         throw new Error('Invalid Credentials');
     }
-};
+});
 // handle refresh token
-const handleRefreshToken = async (req, res) => {
+const handleRefreshToken = asyncHandler(async (req, res) => {
     const cookie = req.cookies;
     if(!cookie?.refreshToken) throw new Error('No Refresh Token in Cookies');
     const refreshToken = cookie.refreshToken;
@@ -108,11 +102,11 @@ const handleRefreshToken = async (req, res) => {
         const accessToken = generateToken(user?._id)
         res.json({accessToken});
     })   
-};
+});
 
 // Logout Functionality
 
-const logout = async (req, res) => {
+const logout = asyncHandler(async (req, res) => {
     const cookie = req.cookies;
     if (!cookie?.refreshToken) {
       throw new Error('No Refresh Token in Cookies');
@@ -141,24 +135,19 @@ const logout = async (req, res) => {
       secure: true,
     });
     res.sendStatus(204); // No Content
-  };
+  });
   
 
 // Update a user
 
-const UpdateaUser = async (req, res) => {
+const UpdateaUser = asyncHandler(async (req, res) => {
     const {_id} = req.user;
     validateMongodbId(_id)
     try {
         const UpdateaUser = await User.findByIdAndUpdate(_id, {
             firstname: req?.body?.firstname,
             lastname: req?.body?.lastname,
-            dateOfBirth: req?.body?.dateOfBirth,
-            department: req?.body?.department,
-            salary: req?.body?.salary,
             email: req?.body?.email,
-            hireDate: req?.body?.hireDate,
-            jobTitle: req?.body?.jobTitle,
             mobile: req?.body?.mobile,
         },
         {
@@ -169,11 +158,11 @@ const UpdateaUser = async (req, res) => {
     } catch (error) {
         throw new Error(error);
     }
-};
+})
 
 // Save User Address
 
-const saveAddress = async (req, res, next) => {
+const saveAddress = asyncHandler(async (req, res, next) => {
     const {_id} = req.user;
     validateMongodbId(_id)
     try {
@@ -188,11 +177,11 @@ const saveAddress = async (req, res, next) => {
     } catch (error) {
         throw new Error(error);
     }
-}
+})
 
 // Get all user
 
-const getallUser = async(req, res) =>{
+const getallUser = asyncHandler(async(req, res) =>{
  try {
     const getUsers = await User.find();
     res.json(getUsers);
@@ -200,11 +189,11 @@ const getallUser = async(req, res) =>{
   catch (error) {
         throw new Error(error)
     }
-};
+});
 
 // Get a single user
 
-const getaUser = async(req, res) => {
+const getaUser = asyncHandler(async(req, res) => {
         const {id} = req.params;
         validateMongodbId(id)
         try {
@@ -215,11 +204,11 @@ const getaUser = async(req, res) => {
         } catch (error) {
             throw new Error(error);
         }
-};
+});
 
 // Delete a single user
 
-const deleteaUser = async(req, res) => {
+const deleteaUser = asyncHandler(async(req, res) => {
     const {id} = req.params;
     validateMongodbId(id)
     try {
@@ -230,7 +219,100 @@ const deleteaUser = async(req, res) => {
     } catch (error) {
         throw new Error(error);
     }
-};
+});
+
+const blockUser = asyncHandler(async(req, res)=> {
+    const {id} = req.params;
+    validateMongodbId(id)
+    try {
+        const block = await User.findByIdAndUpdate(
+            id,
+         {
+            isBlocked: true,
+         },
+        {
+            new: true,
+        }
+    );
+    res.json({
+        message: "User Blocked"
+    })
+    } catch (error) {
+        throw new Error(error);
+    }
+});
+const unblockUser = asyncHandler(async(req, res)=> {
+    const {id} = req.params;
+    validateMongodbId(id)
+    try {
+        const unblock = await User.findByIdAndUpdate(
+            id,
+         {
+            isBlocked: false,
+         },
+        {
+            new: true,
+        }
+    );
+    res.json({
+        message: "User Unblocked"
+    })
+    } catch (error) {
+        throw new Error(error);
+    }
+});
+
+const updatePassword = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { password } = req.body;
+    validateMongodbId(_id);
+    const user = await User.findById(_id);
+    if (password) {
+      user.password = password;
+      const updatedPassword = await user.save();
+      res.json(updatedPassword);
+    } else {
+      res.json(user);
+    }
+  });
+
+
+  const forgotPasswordToken = asyncHandler(async (req, res) => {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) throw new Error("User not found with this email");
+    try {
+      const token = await user.createPasswordResetToken();
+      await user.save();
+      const resetURL = `Hi, Please follow this link to reset Your Password. This link is valid till 10 minutes from now. <a href='http://localhost:5000/api/user/reset-password/${token}'>Click Here</>`;
+      const data = {
+        to: email,
+        text: "Hey User",
+        subject: "Forgot Password Link",
+        htm: resetURL,
+      };
+      sendEmail(data)
+      res.json(token);
+    } catch (error) {
+      throw new Error(error);
+    }
+  });
+
+  const resetPassword = asyncHandler(async (req, res) => {
+    const { password } = req.body;
+    const { token } = req.params;
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+    const user = await User.findOne({
+      passwordResetToken: hashedToken,
+      passwordResetExpires: { $gt: Date.now() },
+    });
+    if (!user) throw new Error(" Token Expired, Please try again later");
+    user.password = password;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save();
+    res.json(user);
+  });
 
 
 module.exports = {
@@ -240,8 +322,13 @@ module.exports = {
     getaUser, 
     deleteaUser, 
     UpdateaUser, 
+    blockUser, 
+    unblockUser,
     handleRefreshToken,
     logout,
+    updatePassword,
+    forgotPasswordToken,
+    resetPassword,
     loginAdmin,
-    saveAddress,
+    saveAddress
 }

@@ -6,7 +6,7 @@
       "version": "1.0.0"
     },
     "host": "localhost:5500",
-    "basePath": "/api/user",
+    "basePath": "/api",
     "schemes": ["http"],
     "tags": [
       {
@@ -19,7 +19,7 @@
       }
     ],
     "securityDefinitions": {
-      "jwt": {
+      "Bearer": {
         "type": "apiKey",
         "name": "Authorization",
         "in": "header"
@@ -82,7 +82,7 @@
           },
           "security": [
             {
-              "jwt": []
+              "Bearer": []
             }
           ]
         }
@@ -114,10 +114,10 @@
             }
           },
           "security": [
-            {
-              "jwt": []
-            }
-          ]
+          {
+            "Bearer": []
+          }
+        ]
         }
       },
       "/all-users": {
@@ -136,10 +136,10 @@
             }
           },
           "security": [
-            {
-              "jwt": []
-            }
-          ]
+          {
+            "Bearer": []
+          }
+        ]
         }
       },
       "/refresh": {
@@ -158,10 +158,10 @@
             }
           },
           "security": [
-            {
-              "jwt": []
-            }
-          ]
+          {
+            "Bearer": []
+          }
+        ]
         }
       },
       "/logout": {
@@ -180,10 +180,10 @@
             }
           },
           "security": [
-            {
-              "jwt": []
-            }
-          ]
+          {
+            "Bearer": []
+          }
+        ]
         }
       },
       "/{id}": {
@@ -220,10 +220,10 @@
             }
           },
           "security": [
-            {
-              "jwt": []
-            }
-          ]
+          {
+            "Bearer": []
+          }
+        ]
         },
         "delete": {
           "tags": ["Users"],
@@ -255,10 +255,10 @@
             }
           },
           "security": [
-            {
-              "jwt": []
-            }
-          ]
+          {
+            "Bearer": []
+          }
+        ]
         }
       },
       "/edit-user": {
@@ -291,10 +291,10 @@
             }
           },
           "security": [
-            {
-              "jwt": []
-            }
-          ]
+          {
+            "Bearer": []
+          }
+        ]
         }
       },
       "/save-address": {
@@ -327,10 +327,10 @@
             }
           },
           "security": [
-            {
-              "jwt": []
-            }
-          ]
+          {
+            "Bearer": []
+          }
+        ]
         }
       }
     },

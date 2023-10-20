@@ -1,39 +1,59 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose"); // Erase if already required
 
-// Declare the Schema for Product collection
-const productSchema = new mongoose.Schema({
-  productName: {
-    type: String,
-    required: true,
+// Declare the Schema of the Mongo model
+var productSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    brand: {
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    sold: {
+      type: Number,
+      default: 0,
+    },
+    color: [],
+    tags: String,
+    ratings: [
+      {
+        star: Number,
+        comment: String,
+        postedby: { type: mongoose.Schema.ObjectId, ref: "User" },
+      },
+    ],
+    totalrating: {
+      type: String,
+      default: 0,
+    },
   },
-  description: {
-    type: String,
-  },
-  category: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  quantityInStock: {
-    type: Number,
-    required: true,
-  },
-  manufacturer: {
-    type: String,
-    required: true,
-  },
-  supplier: {
-    type: String,
-    required: true,
-  },
-  dateAdded: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
-// Create the Product model
-module.exports = mongoose.model('Product', productSchema);
+//Export the model
+module.exports = mongoose.model("Product", productSchema);

@@ -5,20 +5,19 @@ const {
   getAllProduct,
   updateProduct,
   deleteProduct,
+  rating,
 } = require("../controllers/productController");
 const { isAdmin, authMiddleware } = require("../middlewares/authMiddleware");
-const asyncHandler = require("express-async-handler");
 const router = express.Router();
 
-router.post("/", authMiddleware, isAdmin, asyncHandler(createProduct));
+router.post("/", authMiddleware, isAdmin, createProduct);
 
-router.get("/:id", asyncHandler(getaProduct));
+router.get("/:id", getaProduct);
+router.put("/rating", authMiddleware, rating);
 
-router.put("/:id", authMiddleware, isAdmin, asyncHandler(updateProduct));
-router.delete("/:id", authMiddleware, isAdmin, asyncHandler(deleteProduct));
+router.put("/:id", authMiddleware, isAdmin, updateProduct);
+router.delete("/:id", authMiddleware, isAdmin, deleteProduct);
 
-router.get("/", asyncHandler(getAllProduct));
+router.get("/", getAllProduct);
 
-
-
-module.exports =  router
+module.exports = router;
