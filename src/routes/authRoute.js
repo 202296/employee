@@ -14,7 +14,7 @@ const {
     forgotPasswordToken,
     resetPassword,
     loginAdmin,
-    saveAddress,
+    saveAddress
 } = require('../controllers/userController');
 const { authMiddleware, isAdmin } = require('../middlewares/authMiddleware');
 

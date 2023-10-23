@@ -172,6 +172,5 @@ module.exports = {
   getAllProduct,
   updateProduct,
   deleteProduct,
-  addToWishlist,
   rating,
 };
